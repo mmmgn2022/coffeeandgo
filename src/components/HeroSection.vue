@@ -1,0 +1,64 @@
+<template>
+  <div class="hero">
+    <!-- Desktop -->
+    <div class="container">
+      <div class="d-none d-md-block">
+        <div class="row mt-4">
+          <div class="col-md-6">
+            <div class="d-flex h-100">
+              <div class="justify-content-center align-self-center">
+                <h2>
+                  <strong>Delicious Coffee Menu,</strong>
+                  <br />in Your Gadget
+                </h2>
+                <p>Come choose and order your favorite coffee</p>
+                <router-link class="btn btn-lg btn-warning" to="/beverages">
+                  <i class="bi-arrow-right"></i>
+                  Order
+                </router-link>
+              </div>
+            </div>
+          </div>
+          <img
+            src="../assets/images/hero.svg"
+            :style="{ width: '40%', height: '50%' }"
+            class="img-fluid col-md-6 ms-auto"
+            alt="hero"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile -->
+    <div class="d-sm-block d-md-none p-4">
+      <div class="row mt-4">
+        <img
+          src="../assets/images/hero.svg"
+          class="img-fluid col-md-6 mb-3"
+        />
+        <div class="col-md-6">
+          <div class="d-flex h-100">
+            <div class="justify-content-center align-self-center">
+              <h2>
+                <strong>Delicious Food Menu,</strong>
+                <br />in Your Gadget
+              </h2>
+              <p>Ayo segera pilih dan pesan makanan favorit Anda</p>
+              <button class="btn btn-lg btn-warning">
+                <b-icon-arrow-right></b-icon-arrow-right>Pesan
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "HeroSection",
+};
+</script>
+
+<style></style>
