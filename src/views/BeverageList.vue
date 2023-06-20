@@ -1,18 +1,17 @@
 <template>
   <NavBar />
-  <HeroSection />
-  <!-- <h2>Homepage</h2> -->
+  <h2>List of Beverages</h2>
 </template>
 
 <script>
 import NavBar from "@/components/NavBar.vue";
-import HeroSection from "@/components/HeroSection.vue";
 
 export default {
-  name: "HomeView",
+  name: "BeverageList",
   components: {
     NavBar,
-    HeroSection,
   },
 };
 </script>
+
+<style></style>
