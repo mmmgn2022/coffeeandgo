@@ -1,8 +1,8 @@
 <template>
   <div class="hero">
-    <!-- Desktop -->
     <div class="container">
-      <div class="d-none d-md-block">
+    <!-- Desktop -->
+      <div class="d-none d-md-block p-2">
         <div class="row mt-4">
           <div class="col-md-6">
             <div class="d-flex h-100">
@@ -12,7 +12,7 @@
                   <br />in Your Gadget
                 </h2>
                 <p>Come choose and order your favorite coffee</p>
-                <router-link class="btn btn-lg btn-warning" to="/beverages">
+                <router-link class="btn btn-lg btn-warning text-white" to="/beverages">
                   <i class="bi-arrow-right"></i>
                   Order
                 </router-link>
@@ -26,7 +26,6 @@
             alt="hero"
           />
         </div>
-      </div>
     </div>
 
     <!-- Mobile -->
@@ -40,18 +39,20 @@
           <div class="d-flex h-100">
             <div class="justify-content-center align-self-center">
               <h2>
-                <strong>Delicious Food Menu,</strong>
+                <strong>Delicious Coffee Menu,</strong>
                 <br />in Your Gadget
               </h2>
-              <p>Ayo segera pilih dan pesan makanan favorit Anda</p>
+              <p>Come choose and order your favorite coffee</p>
               <button class="btn btn-lg btn-warning">
-                <b-icon-arrow-right></b-icon-arrow-right>Pesan
+                <b-icon-arrow-right></b-icon-arrow-right>Order
               </button>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+  </div>
   </div>
 </template>
 
@@ -61,4 +62,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+</style>
