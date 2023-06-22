@@ -1,15 +1,21 @@
 <template>
   <div class="card card-product">
-    <img
-      :src="
-        product.picture.includes('http')
-          ? product.picture
-          : 'assets/images/' + product.picture
-      "
-      :style="{ backgroundSize: 'cover', maxWidth: '100%', maxHeight: '300px' }"
-      class="card-img-top"
-      alt="..."
-    />
+    <router-link
+      :to="'/beverages/' + product.id"
+      ><img
+        :src="
+          product.picture.includes('http')
+            ? product.picture
+            : 'assets/images/' + product.picture
+        "
+        :style="{
+          backgroundSize: 'cover',
+          maxWidth: '100%',
+          maxHeight: '200px',
+        }"
+        class="card-img-top"
+        alt="..."
+    /></router-link>
     <div class="card-body">
       <h5 class="card-title">{{ product.name }}</h5>
       <p class="card-text">Price : Rp. {{ product.price }}</p>

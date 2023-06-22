@@ -1,8 +1,7 @@
 <template>
   <NavBar />
-    <HeroSection />
+    <Hero />
   <div class="container home p-4">
-    <div class="home">
       <div class="row mt-4">
         <div class="col">
           <h2>
@@ -37,29 +36,32 @@
           <CardProduct :product="product" />
         </div>
       </div>
-    </div>
   </div>
 </template>
 
 <script>
+// eslint-disable-next-line vue/multi-word-component-names
+/* eslint-disable */
 import NavBar from "@/components/NavBar.vue";
-import HeroSection from "@/components/HeroSection.vue";
+import Hero from "@/components/Hero.vue";
 import CardProduct from "@/components/CardProduct.vue";
 import axios from "axios";
 
 export default {
-  name: "HomeView",
+  name: "Home",
   components: {
     NavBar,
-    HeroSection,
+    Hero,
     CardProduct,
   },
   data() {
     return {
+      //initial state empty array for products
       products: [], //nanti data product dilempar kesini dari fake api
     };
   },
   methods: {
+    //update the products state
     setProducts(data) {
       this.products = data;
     },
@@ -76,9 +78,4 @@ export default {
 </script>
 
 <style>
-@media (max-width: 576px) {
-  .home {
-    padding: 4px;
-  }
-}
 </style>
