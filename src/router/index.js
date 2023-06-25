@@ -3,6 +3,8 @@ import Home from '../views/Home.vue'
 import BeverageList from '../views/BeverageList.vue'
 import BeverageDetail from '../views/BeverageDetail.vue'
 import Cart from '../views/Cart.vue'
+import CheckOut from '../views/CheckOut.vue'
+import NotFound from '../views/NotFound.vue'
 
 const routes = [
   {
@@ -24,6 +26,16 @@ const routes = [
     path: '/cart',
     name: 'Cart',
     component: Cart
+  },
+  {
+    path: '/checkout',
+    name: 'CheckOut',
+    component: CheckOut
+  },
+  {
+    path: '/:catchAll(.*)',
+    name: 'NotFound',
+    component: NotFound
   }
 ]
 

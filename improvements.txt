@@ -1,9 +1,13 @@
 pagination buat beverage detail 
 skeleton buat card product sama image and smua nama price dll yg didapet dr database (karena emg mau belajar skeleton)
 
+https://github.com/DarkC0der11/vue-skeletor  --> skeleton vue
 
 quantity nya masih bisa minus harus dijadiiin mulai dari 0 
 
 kalo udah klik order bikin onloading di buttonnya dan quantity sama order detailsnya ke reset jd ga bisa double order , oh ato ga pake router link ke home  
 
 my Cart (1) --> total numbers yg di cart 
+
+like a loading skeleton for the count of orders inside the cart cause dia kaya suka reset ke 0 klo ke page lain baru bbrp detik muncul count yg bener
+

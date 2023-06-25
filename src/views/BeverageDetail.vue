@@ -102,7 +102,6 @@
           <!-- v-on:submit.prevent biar klo klik pesan gak reload -->
           <form class="mt-4" v-on:submit.prevent>
             <div class="form-group">
-              <!-- jumlah_pemesanan change to quantity -->
               <label for="quantity">Quantity</label>
               <input
                 type="number"
@@ -111,7 +110,6 @@
               />
             </div>
             <div class="form-group mt-4">
-              <!-- keterangan change to details -->
               <label for="details">Order Details</label>
               <textarea
                 v-model="order.details"
@@ -120,7 +118,6 @@
                 placeholder="Example: large, less sugar, cold, less ice, extra shot, grass jelly..."
               ></textarea>
             </div>
-            <!-- pemesanan change to order -->
             <!-- userOrder itu di method kalo di klik button Order baru jalan -->
             <button
               type="submit"
