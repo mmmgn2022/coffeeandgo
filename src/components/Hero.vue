@@ -44,7 +44,7 @@
               </h2>
               <p>Come choose and order your favorite coffee</p>
               <button class="btn btn-lg btn-warning">
-                <b-icon-arrow-right></b-icon-arrow-right>Order
+                <i class="bi-arrow-right"></i>Order
               </button>
             </div>
           </div>
@@ -57,8 +57,10 @@
 </template>
 
 <script>
+// eslint-disable-next-line vue/multi-word-component-names
+/* eslint-disable */
 export default {
-  name: "HeroSection",
+  name: "Hero",
 };
 </script>
 
