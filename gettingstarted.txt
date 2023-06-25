@@ -1,0 +1,56 @@
+Projek atas referensi dan bimbingan video Wahidev Academy (https://youtube.com/playlist?list=PLIan8aHxsPj3a7oLHb2a8pw8IHBq45WYu) dan mini projek modul 4 coffee cashier Purwadhika
+
+<----- GETTING STARTED ----->
+
+npm install -g @vue/cli (sekali aja install globally)  (https://cli.vuejs.org/guide/installation.html)
+
+vue create project-name  (dalem vs code biar ga error nanti bikin projek folder Vue kek react)
+
+vue create coffeeandgo (harus huruf kecil semua)
+
+<----- INSTALL EXTENSION IN VSCODE ----->
+
+install extension Vetur 
+(a valuable tool for Vue.js developers, enabling them to write clean, efficient, and error-free code)
+(key functionalities offered by the Vetur extension: Syntax Highlighting, IntelliSense and Autocompletion, Error Checking, Formatting and Linting, Component Preview, Vue Project Management)
+
+RUN TERMINAL : vue ui
+
+open terminal :  ketik "vue ui"  (buat run server sama redirect ke Vue Project Manager)
+🚀  Starting GUI...
+🌠  Ready on http://localhost:8000
+click create (oh ini cara bikin projek vue juga lebih ribet)
+
+karena udah punya folder projek vue click import di Vue Project Manager
+
+<----- INSTALL PLUGIN AND DEPENDENCIES -----> 
+
+ke extension -> search: router (ini extension)
+  Installing @vue/cli-plugin-router...
+✔  Successfully invoked generator for plugin: @vue/cli-plugin-router
+
+ke dependencies -> install dependency -> search: bootstrap-vue (buat class styling) 
+ke dependencies -> install dependency -> search: axios 
+
+ke task -> ke serve -> Run task -> (SUCCESS) -> click open app
+
+berhasil (krn nama folder plg depan ak gak kasi spasi, STATUS SUCCESS)
+
+nanti dapet Home (http://localhost:8080/#/) dan About (http://localhost:8080/#/about)
+
+
+OPEN TERMINAL --> npm run serve 
+  App running at:
+  - Local:   http://localhost:8080/ ----> bisa dibuka buat liat di browser
+  - Network: http://192.168.100.118:8080/ ----> bisa dibuka buat liat di browser (same thing)
+
+cheat sheet for Bootstrap
+https://bootstrap-cheatsheet.themeselection.com/
+
+reference source code:
+https://github.com/afifbasya/kulineran
+
+free illustrations undraw.co
+warnanya jg bisa di setting sesuai keinginan kita 
+https://undraw.co/search
+yellow: #FFC107

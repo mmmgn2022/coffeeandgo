@@ -53,18 +53,14 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(cart, index) in cart" :key="cart.id" >
+                <tr v-for="(cart, index) in cart" :key="cart.id">
                   <th>{{ index + 1 }}</th>
                   <td>
-                    <!-- <img
-                      :src="'../assets/images/' + cart.products.picture"
-                      class="img-fluid shadow"
-                      width="250"
-                    /> -->
                     <!-- products karena sesuai nama database json-server -->
                     <img
-                      :src="cart.products.picture"
-                      class="img-fluid shadow rounded"
+                      :src="getImageSource()"
+                      class="img-fluid rounded"
+                      alt="..."
                       :style="{
                         minWidth: '200px',
                         width: '200px',
@@ -86,25 +82,54 @@
                     >
                   </td>
                   <td align="left" class="text-danger">
-                    <!-- hapuscart change to deleteCart -->
                     <i class="bi bi-trash3" @click="deleteCart(cart.id)"></i>
                   </td>
                 </tr>
                 <tr>
-                   <td></td>
+                  <td></td>
                   <td colspan="6" align="right">
-                    <!-- totalHarga change to totalPrice -->
                     <strong>Total Price :</strong>
                   </td>
                   <!-- ini untuk total semua dalam cart -->
                   <td align="right">
                     <strong>Rp. {{ totalPrice }}</strong>
                   </td>
-                 
                 </tr>
               </tbody>
             </table>
           </div>
+        </div>
+      </div>
+
+      <!-- Form Checkout -->
+      <div class="row justify-content-end">
+        <div class="col-md-4">
+          <form class="mt-4" v-on:submit.prevent>
+            <div class="form-group">
+              <label for="name">Name :</label>
+              <input
+                type="text"
+                class="form-control mt-1"
+                v-model="order.name"
+              />
+            </div>
+            <div class="form-group mt-4">
+              <label for="tableNumber">Table Number :</label>
+              <input
+                type="text"
+                class="form-control mt-1"
+                v-model="order.tableNumber"
+              />
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-warning float-right text-white mt-4"
+              @click="checkOut"
+            >
+              <i class="bi bi-cart-check"></i> Check Out
+            </button>
+          </form>
         </div>
       </div>
     </div>
@@ -132,9 +157,16 @@ export default {
     setCart(data) {
       this.cart = data;
     },
+    getImageSource() {
+      if (this.cart[0].products.picture && this.cart[0].products.picture.includes("http")) {
+        return this.cart[0].products.picture;
+      } else {
+        return "../assets/images/" + this.cart[0].products.picture;
+      }
+    },
     deleteCart(id) {
       axios
-        .delete("http://localhost:3000/carts/" + id)
+        .delete("http://localhost:3000/carts/" + id) //params
         .then(() => {
           this.$toast.error("Order deleted", {
             type: "error",
@@ -147,16 +179,54 @@ export default {
             .get("http://localhost:3000/carts")
             .then((response) => {
               this.setCart(response.data);
-              console.log(
-                "ini isi dari response.data / update dari isi cart :",
-                response.data
-              );
+              // console.log(
+              //   "ini isi dari response.data / update dari isi cart :",
+              //   response.data
+              // ); // testing
             })
             .catch((err) =>
               console.log("ini error dari update get data cart :", err)
             );
         })
         .catch((err) => console.log("ini error dari delete data cart :", err));
+    },
+    checkOut() {
+      if (!this.order.name && !this.order.tableNumber) {
+        this.$toast.error(" Fill the Name and Table Number field", {
+          type: "error",
+          position: "bottom",
+          duration: 3000,
+          dismissible: true,
+          queue: true,
+        });
+        return;
+      }
+      this.order.cart = this.cart;
+      axios
+        .post("http://localhost:3000/orders", this.order) //post new data di db orders
+        .then(() => {
+          // delete data orders from db carts
+          this.cart.map(function (item) {
+            return axios
+              .delete("http://localhost:3000/carts/" + item.id)
+              .catch((err) =>
+                console.log(
+                  "ini error dari delete semua data order cart setelah checkout :",
+                  err
+                )
+              );
+          });
+          console.log("Check out success"); //testing
+          this.$toast.success("Check out success", {
+            type: "success",
+            position: "bottom",
+            duration: 3000,
+            dismissible: true,
+            queue: true,
+          });
+          // redirect to checkout success page
+          this.$router.push("/checkout"); // page barunya path nya ini, nama pagenya CheckOut.vue
+        });
     },
   },
   // di mounted pas akses page lsg axios get nya jalan
@@ -165,11 +235,11 @@ export default {
       .get("http://localhost:3000/carts")
       .then((response) => {
         this.setCart(response.data);
-        console.log("ini isi dari response.data / isi cart :", response.data);
-        console.log(
-          "Data type of data.products.price:",
-          typeof response.data[0].products.price
-        );
+        console.log("ini isi dari response.data / isi cart :", response.data); //testing
+        // console.log(
+        //   "Data type of data.products.price:",
+        //   typeof response.data[0].products.price
+        // ); // testing
       })
       .catch((err) => console.log("ini error dari get data cart :", err));
   },
@@ -180,7 +250,7 @@ export default {
         // price dari db, quantity dari fe
         return items + data.products.price * data.quantity;
       }, 0);
-      console.log("ini isi dari final total dari fungsi totalPrice :", total); //testing
+      // console.log("ini isi dari final total dari fungsi totalPrice :", total); //testing
       return total;
     },
   },

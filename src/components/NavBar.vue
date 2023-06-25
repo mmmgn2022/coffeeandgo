@@ -62,10 +62,10 @@ export default {
       .get("http://localhost:3000/carts") // hitung banyaknya order di DB carts (bukan dr jumlah total quantity)
       .then((response) => {
         this.setCountOrder(response.data);
-        console.log(
-          "ini isi dari jumlah order dapat dari cart di navbar :",
-          response.data
-        ); // testing
+        // console.log(
+        //   "ini isi dari jumlah order dapat dari cart di navbar :",
+        //   response.data
+        // ); // testing
       })
       .catch((err) =>
         console.log("ini error dari jumlah order dapat dari cart di navbar :", err)
