@@ -1,0 +1,9 @@
+pagination buat beverage detail 
+skeleton buat card product sama image and smua nama price dll yg didapet dr database (karena emg mau belajar skeleton)
+
+
+quantity nya masih bisa minus harus dijadiiin mulai dari 0 
+
+kalo udah klik order bikin onloading di buttonnya dan quantity sama order detailsnya ke reset jd ga bisa double order , oh ato ga pake router link ke home  
+
+my Cart (1) --> total numbers yg di cart 

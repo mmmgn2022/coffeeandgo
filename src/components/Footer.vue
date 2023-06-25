@@ -1,5 +1,5 @@
 <template>
-  <footer class="text-center text-white" style="background-color: #ffffff">
+  <footer class="text-center text-white" style="background-color: #ffffff, position: relative, bottom: 0;">
     <!-- Grid container -->
     <div class="container pt-4">
       <!-- Section: Social media -->
@@ -11,7 +11,7 @@
           role="button"
           data-mdb-ripple-color="dark"
           >
-          <i class="bi bi-facebook"></i
+          <i class="bi bi-facebook" style="color: #ffc107;"></i
         >
         </a>
 
@@ -21,7 +21,7 @@
           href="#!"
           role="button"
           data-mdb-ripple-color="dark"
-          ><i class="bi bi-twitter"></i
+          ><i class="bi bi-twitter" style="color: #ffc107;"></i
         ></a>
 
         <!-- Google -->
@@ -30,7 +30,7 @@
           href="#!"
           role="button"
           data-mdb-ripple-color="dark"
-          ><i class="bi bi-google"></i
+          ><i class="bi bi-google" style="color: #ffc107;"></i
         ></a>
 
         <!-- Instagram -->
@@ -39,7 +39,7 @@
           href="#!"
           role="button"
           data-mdb-ripple-color="dark"
-          ><i class="bi bi-instagram"></i
+          ><i class="bi bi-instagram" style="color: #ffc107;"></i
         ></a>
 
         <!-- Linkedin -->
@@ -48,7 +48,7 @@
           href="#!"
           role="button"
           data-mdb-ripple-color="dark"
-          ><i class="bi bi-linkedin"></i
+          ><i class="bi bi-linkedin" style="color: #ffc107;"></i
         ></a>
       </section>
       <!-- Section: Social media -->
@@ -61,7 +61,7 @@
       style="background-color: #ffffff"
     >
       © 2023 Copyright:
-      <a class="text-dark" href="/">Coffee & Go</a>
+      <a class="text-dark" href="/" style="textDecoration: none">Coffee & Go</a>
     </div>
     <!-- Copyright -->
   </footer>

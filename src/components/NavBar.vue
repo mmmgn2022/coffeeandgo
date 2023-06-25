@@ -2,11 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
       <a class="navbar-brand" href="#">
-        <img
-          class="logo"
-          src="../assets/images/coffeeandgo_logo.png"
-          alt=""
-        />
+        <img class="logo" src="../assets/images/coffeeandgo_logo.png" alt="" />
       </a>
       <button
         class="navbar-toggler"
@@ -37,8 +33,8 @@
             <router-link class="nav-link" to="/cart"
               >Cart
               <i class="bi-cart"></i>
-              <span class="badge bg-success ms-2">0</span>
-              </router-link>
+              <span class="badge bg-success ms-2"> {{ updateCart ? updateCart.length : sumOrder.length }} </span>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -47,8 +43,34 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "NavBar",
+  data() {
+    return {
+      sumOrder: [],
+    };
+  },
+  props: ["updateCart"],
+  methods: {
+    setCountOrder(data) {
+      this.sumOrder = data;
+    },
+  },
+  mounted() {
+    axios
+      .get("http://localhost:3000/carts") // hitung banyaknya order di DB carts (bukan dr jumlah total quantity)
+      .then((response) => {
+        this.setCountOrder(response.data);
+        console.log(
+          "ini isi dari jumlah order dapat dari cart di navbar :",
+          response.data
+        ); // testing
+      })
+      .catch((err) =>
+        console.log("ini error dari jumlah order dapat dari cart di navbar :", err)
+      );
+  },
 };
 </script>
 

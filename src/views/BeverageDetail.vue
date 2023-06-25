@@ -1,22 +1,30 @@
 <template>
   <div class="beverage-detail">
     <NavBar />
-    <div class="container">
+    <div class="container p-4">
       <!-- breadcrumb -->
       <div class="row mt-4">
         <div class="col">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
-                <router-link to="/" class="text-dark">Home</router-link>
+                <router-link
+                  to="/"
+                  class="text-dark"
+                  :style="{ textDecoration: 'none' }"
+                  >Home</router-link
+                >
               </li>
               <li class="breadcrumb-item">
-                <router-link to="/beverages" class="text-dark"
+                <router-link
+                  to="/beverages"
+                  class="text-dark"
+                  :style="{ textDecoration: 'none' }"
                   >Beverages</router-link
                 >
               </li>
               <li class="breadcrumb-item active" aria-current="page">
-                Beverage Detail
+                <span style="fontweight: bold"> Beverage Order </span>
               </li>
             </ol>
           </nav>
@@ -24,25 +32,63 @@
       </div>
 
       <div class="row mt-3">
-        <div class="col-md-6">
-          <!-- ada yg aneh disini kalo ternary dia gamau (uncaught runtime error : $data.product.picture is undefined) tp kalau 1 per 1 mau, memang agak beda sama cardproduct itu component yg dikeluarkan di home sama bevergae list page, kalo di beverage detail page ini axiosnya lsg di file yg sama   -->
-
-          <!-- <img
-            :src="
-              product.picture.includes('http')
-                ? product.picture
-                : '../assets/images/' + product.picture
-            "
-            class="img-fluid shadow"
-            alt="..."
-          /> -->
-
+        <!-- Desktop -->
+        <div class="col-md-6 mb-4 d-none d-xl-block">
           <img
-            :src="product.picture"
-            class="img-fluid shadow"
+            :src="getImageSource()"
+            class="img-fluid rounded"
             alt="..."
+            :style="{
+              maxWidth: '100vw',
+              maxHeight: '60vh',
+              width: '500px',
+              height: '500px',
+            }"
           />
-          <!-- <img :src="'../assets/images/' + product.picture" class="img-fluid shadow" alt="..." /> -->
+        </div>
+        <!-- Large Screen -->
+        <div
+          class="col-md-6 mb-4 d-none d-xl-none d-lg-block d-md-none d-sm-none d-xs-none"
+        >
+          <img
+            :src="getImageSource()"
+            class="img-fluid rounded"
+            alt="..."
+            :style="{
+              maxWidth: '35vw',
+              maxHeight: '50vh',
+              width: '500px',
+              height: '500px',
+            }"
+          />
+        </div>
+        <!-- Medium Screen -->
+        <div
+          class="col-md-6 mb-4 d-none d-xl-none d-lg-none d-md-block d-sm-none d-xs-none"
+        >
+          <img
+            :src="getImageSource()"
+            class="img-fluid rounded"
+            alt="..."
+            :style="{
+              width: '500px',
+              height: '400px',
+            }"
+          />
+        </div>
+        <!-- Small Screen -->
+        <div class="col-md-6 mb-4 d-md-none d-sm-block d-xs-block">
+          <img
+            :src="getImageSource()"
+            class="img-fluid rounded"
+            alt="..."
+            :style="{
+              maxWidth: '85vw',
+              maxHeight: '50vh',
+              width: '500px',
+              height: '500px',
+            }"
+          />
         </div>
         <div class="col-md-6">
           <h2>
@@ -53,6 +99,7 @@
             Price :
             <strong>Rp. {{ product.price }}</strong>
           </h4>
+          <!-- v-on:submit.prevent biar klo klik pesan gak reload -->
           <form class="mt-4" v-on:submit.prevent>
             <div class="form-group">
               <!-- jumlah_pemesanan change to quantity -->
@@ -69,15 +116,16 @@
               <textarea
                 v-model="order.details"
                 class="form-control mt-1"
-                rows="5"
+                rows="2"
                 placeholder="Example: large, less sugar, cold, less ice, extra shot, grass jelly..."
               ></textarea>
             </div>
             <!-- pemesanan change to order -->
+            <!-- userOrder itu di method kalo di klik button Order baru jalan -->
             <button
               type="submit"
               class="btn btn-warning mt-4 text-white"
-              @click="order"
+              @click="userOrder"
             >
               <i class="bi-cart"></i> Order
             </button>
@@ -107,7 +155,54 @@ export default {
     setProduct(data) {
       this.product = data;
     },
+    getImageSource() {
+      if (this.product.picture && this.product.picture.includes("http")) {
+        return this.product.picture;
+      } else {
+        return "../assets/images/" + this.product.picture;
+      }
+    },
+    userOrder() {
+      if (!this.order.quantity) {
+        this.$toast.error("Please enter the quantity", {
+          type: "error",
+          position: "bottom",
+          duration: 3000,
+          dismissible: true,
+          queue: true,
+        });
+        return;
+      }
+      console.log("ini isi this.order :", this.order);
+      this.order.products = this.product;
+      console.log("ini isi this.product dari userOrder :", this.product);
+      axios
+        .post("http://localhost:3000/carts/", this.order)
+        .then(() => {
+          console.log("Order success"); //testing
+          this.$toast.success("Order placed", {
+            type: "success",
+            position: "bottom",
+            duration: 3000,
+            dismissible: true,
+            queue: true,
+          });
+          // Redirect to the home page
+          this.$router.push("/");
+        })
+        .catch((err) => {
+          console.log("ini error dari userOrder axios post :", err);
+          this.$toast.error("Failed to place order", {
+            type: "error",
+            position: "bottom",
+            duration: 3000,
+            dismissible: true,
+            queue: true,
+          });
+        });
+    },
   },
+  // di mounted pas akses page lsg axios get nya jalan
   mounted() {
     axios
       .get("http://localhost:3000/products/" + this.$route.params.id)
@@ -118,7 +213,7 @@ export default {
           response.data
         );
       })
-      .catch((error) => console.log(error));
+      .catch((err) => console.log("ini error dari get data products params id", err));
   },
 };
 </script>

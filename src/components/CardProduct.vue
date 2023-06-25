@@ -12,6 +12,7 @@
           backgroundSize: 'cover',
           maxWidth: '100%',
           maxHeight: '200px',
+          cursor: 'pointer',
         }"
         class="card-img-top"
         alt="..."
